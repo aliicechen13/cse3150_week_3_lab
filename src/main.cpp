@@ -18,7 +18,9 @@ int main(int argc, char* argv[]) {
     bool running = true;
     while (running) {
         cout << "\n1) add  2) update  3) print  4) compute  5) exit\n> ";
-        int choice; if (!(cin >> choice)) return 0;
+        int choice; 
+	if (!(cin >> choice)) return 0;
+
         try {
             switch (choice) {
                 case 1: {
@@ -62,5 +64,7 @@ int main(int argc, char* argv[]) {
     }
 
     // TODO: Free memory!
+    delete[] values;
+    delete[] labels;
     return 0;
 }

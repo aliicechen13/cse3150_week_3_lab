@@ -1,34 +1,57 @@
-#include "logger.h"
-#include <string>
 #include <iostream>
+#include <string>
+#include "logger.h"
 
-// ======================= TODOs =======================
+using std::cout, std::cin, std::endl, std::string;
 
-void addReading(const std::string& label, double value,
-                std::string labels[], double values[],
-                int& size, int capacity) {
-    // TODO: throw "Full" if size == capacity, else insert and ++size
+void addReading(const string& label, double value, string labels[],
+		double values[], int& size, int capacity) {
+	if (size >= capacity)
+		throw string("Full");
+	labels[size] = label;
+	values[size] = value;
+	size++;
 }
 
 void updateValue(double* valuePtr, double newValue) {
-    // TODO: write through pointer
+	if (valuePtr != nullptr)
+		*valuePtr = newValue;
 }
 
-void printReading(const std::string& label, const double& value) {
-    // TODO: pretty-print one reading
+void printReading(const string& label, const double& value) {
+	cout << label << ": " << value << endl;
 }
 
 double average(const double values[], int size) {
-    // TODO: throw "Empty" if size==0, else compute average
-    return 0.0;
+	if (size == 0)
+		throw string("Empty");
+
+	double sum = 0.0;
+	for (int i = 0; i < size; i++) 
+		sum += values[i];
+	return sum/size;
 }
 
 double minValue(const double values[], int size) {
-    // TODO: throw "Empty" if size==0, else compute min
-    return 0.0;
+	if (size == 0)
+		throw string("Empty");
+
+	double min = values[0];
+	for (int i = 0; i < size; i++) {
+		if (values[i] < min)
+			min = values[i];
+	}	
+	return min;
 }
 
 double maxValue(const double values[], int size) {
-    // TODO: throw "Empty" if size==0, else compute max
-    return 0.0;
+	if (size == 0)
+                throw string("Empty");
+
+	double max = values[0];
+	for (int i = 0; i < size; i++) {
+		if (values[i] > max)
+			max = values[i];
+	}
+	return max;
 }
